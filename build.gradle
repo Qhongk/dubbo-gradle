@@ -4,6 +4,8 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
+        maven { url 'https://repo.spring.io/snapshot' }
+        maven { url 'https://repo.spring.io/milestone' }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -22,21 +24,37 @@ sourceCompatibility = 1.8
 repositories {
 	mavenCentral()
 }
-//
-//allprojects {
-//
-//    compile('org.springframework.boot:spring-boot-starter-web')
-//    compile('org.springframework.kafka:spring-kafka')
-//    compile('org.apache.zookeeper:zookeeper:3.4.11')
-//    compileOnly('org.projectlombok:lombok')
-//}
 
-dependencies {
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.kafka:spring-kafka')
-	compile('org.apache.zookeeper:zookeeper:3.4.11')
-	compile('com.netflix.curator:curator-framework:1.3.3')
-	compile('com.alibaba.boot:dubbo-spring-boot-starter:0.1.0')
-	compileOnly('org.projectlombok:lombok')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+subprojects {
+
+	apply plugin: 'java'
+	apply plugin: "idea"
+
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+
+	tasks.withType(JavaCompile) {
+		options.encoding = 'UTF-8'
+	}
+
+	ext {
+		junitVersion = "4.11"
+		springVersion = "4.3.3.RELEASE"
+		jacksonVersion = "2.4.4"
+		compileJava.options.encoding = 'UTF-8'
+		compileTestJava.options.encoding = 'UTF-8'
+	}
+
+	dependencies {
+//		compile('org.springframework.boot:spring-boot-starter:1.5.14.RELEASE')
+		compile('org.springframework.boot:spring-boot-starter-web:1.5.7.RELEASE')
+		compile('org.springframework.kafka:spring-kafka:1.3.2.RELEASE')
+		compile('org.apache.zookeeper:zookeeper:3.4.11')
+		compile('com.netflix.curator:curator-framework:1.3.3')
+		compile('com.alibaba.boot:dubbo-spring-boot-starter:0.1.0')
+        compile('org.projectlombok:lombok:1.16.18')
+		testCompile('org.springframework.boot:spring-boot-starter-test')
+	}
+
 }
+
