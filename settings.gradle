@@ -1,3 +1,5 @@
 include 'dubbo-consumer'
 include 'dubbo-provider'
 include 'dubbo-interf'
+include 'common'
+
