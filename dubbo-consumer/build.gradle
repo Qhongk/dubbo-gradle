@@ -11,6 +11,8 @@ repositories {
 dependencies {
     compile project(':common')
     compile project(':dubbo-interf')
+    compile('org.springframework.session:spring-session-data-redis:2.0.4.RELEASE')
+    compile('io.lettuce:lettuce-core:5.0.4.RELEASE')
     testCompile("org.springframework.boot:spring-boot-starter-test")
 //    testCompile group: 'junit', name: 'junit', version: '4.12'
 }
